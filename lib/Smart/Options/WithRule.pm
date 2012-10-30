@@ -92,6 +92,8 @@ hayajo E<lt>hayajo@cpan.orgE<gt>
 
 =head1 SEE ALSO
 
+L<Smart::Options>, L<Data::Validator>
+
 =head1 LICENSE
 
 This library is free software; you can redistribute it and/or modify
