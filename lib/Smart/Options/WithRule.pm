@@ -62,7 +62,7 @@ Smart::Options::WithRule - added a rule based validation to L<Smart::Options>.
 
 =head1 DESCRIPTION
 
-This is B<idea>.
+This is an B<idea>.
 
 Smart::Options::WithRule is a variant of L<Smart::Options>.
 
