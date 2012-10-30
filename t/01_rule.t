@@ -5,7 +5,7 @@ use Smart::Options::WithRule;
 use Capture::Tiny ':all';
 use Try::Tiny;
 
-subtest 'validate' => sub {
+subtest 'rule' => sub {
     my $opts = Smart::Options::WithRule->new
                     ->usage("Usage: $0 -x [num] -y [num]")
                     ->demand('x', 'y')
