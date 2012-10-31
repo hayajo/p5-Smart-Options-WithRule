@@ -1,7 +1,9 @@
 use inc::Module::Install;
 use Module::Install::Repository;
+use Module::Install::ReadmePodFromPod;
 name 'Smart-Options-WithRule';
 all_from 'lib/Smart/Options/WithRule.pm';
+readme_pod_from 'lib/Smart/Options/WithRule.pm';
 
 requires 'Smart::Options';
 requires 'Data::Validator';

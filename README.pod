@@ -1,1 +1,58 @@
-lib/Smart/Options/WithRule.pm
+=head1 NAME
+
+Smart::Options::WithRule - added a rule based validation to L<Smart::Options>.
+
+=head1 SYNOPSIS
+
+  use Smart::Options::WithRule;
+
+  my $opts = Smart::Options::WithRule->new
+                     ->usage("Usage: $0 -y [num]")
+                     ->demand('y')
+                     ->describe( y => 'year')
+                     ->rule( y => { isa => 'Num' } );
+
+  $opts->parse(qw/-y 2012/);
+
+=head1 DESCRIPTION
+
+This is an B<idea>.
+
+Smart::Options::WithRule is a variant of L<Smart::Options>.
+
+Smart::Options::WithRule support a rule based validation by L<Data::Validator>.
+
+=head1 METHODS
+
+L<Smart::Options::WithRule> inherits all methods from L<Smart::Options>.
+
+=head2 C<rule>
+
+a validation rule.
+
+ref. L<Data::Validator>
+
+  use Smart::Options::WithRule;
+
+  my $opts = Smart::Options::WithRule->new
+                     ->usage("Usage: $0 -y [num]")
+                     ->demand('y')
+                     ->describe( y => 'year')
+                     ->rule( y => { isa => 'Num' } );
+
+=head1 AUTHOR
+
+hayajo E<lt>hayajo@cpan.orgE<gt>
+
+=head1 SEE ALSO
+
+L<Smart::Options>, L<Data::Validator>
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+
+=cut
+
