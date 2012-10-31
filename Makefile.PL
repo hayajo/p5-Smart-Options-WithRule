@@ -1,4 +1,5 @@
 use inc::Module::Install;
+use Module::Install::Repository;
 name 'Smart-Options-WithRule';
 all_from 'lib/Smart/Options/WithRule.pm';
 
