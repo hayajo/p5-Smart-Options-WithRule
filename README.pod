@@ -6,7 +6,7 @@ Smart::Options::WithRule - added a rule based validation to L<Smart::Options>.
 
   use Smart::Options::WithRule;
 
-  my $opts = Smart::Options::WithRule->new
+  my $opts = Smart::Options->new
                      ->usage("Usage: $0 -y [num]")
                      ->demand('y')
                      ->describe( y => 'year')
@@ -34,7 +34,7 @@ ref. L<Data::Validator>
 
   use Smart::Options::WithRule;
 
-  my $opts = Smart::Options::WithRule->new
+  my $opts = Smart::Options->new
                      ->usage("Usage: $0 -y [num]")
                      ->demand('y')
                      ->describe( y => 'year')

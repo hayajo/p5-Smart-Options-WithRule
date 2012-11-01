@@ -3,7 +3,7 @@ use strict;
 use warnings;
 our $VERSION = '0.01';
 
-use parent qw{ Smart::Options };
+use Smart::Options ();
 
 use Data::Validator;
 use Data::Clone;
@@ -12,33 +12,31 @@ use Exporter;
 
 sub import {
     my $pkg = shift;
-    return Exporter::export_to_level( 'Smart::Options', 1, @_ );
-}
+    no strict 'refs';
+    no warnings 'redefine';
 
-sub new {
-    my $self = shift->SUPER::new(@_);
-    $self->{validate} = {};
-    return $self;
-}
+    *{'Smart::Options::rule'} = sub { shift->_set('rule', @_) };
 
-sub rule { shift->_set('rule', @_) }
-
-sub parse {
-    my $self = shift;
-    my $argv = $self->SUPER::parse(@_);
-    return $argv unless ( keys %{ $self->{rule} } );
-    my $rule = clone( $self->{rule} );
-    my $v = Data::Validator->new(%$rule)->with(qw{ AllowExtra NoThrow });
-    $v->validate(%$argv);
-    if ( $v->has_errors ) {
-        $self->showHelp;
-        print STDERR "\n";
-        foreach my $e ( sort { $a->{name} cmp $b->{name} } @{ $v->clear_errors } ) {
-            print STDERR $e->{message}, "\n";
+    my $orig_parse = *{'Smart::Options::parse'}{CODE};
+    *{'Smart::Options::parse'} = sub {
+        my $argv = $orig_parse->(@_);
+        my $self = shift;
+        return $argv unless ( keys %{ $self->{rule} } );
+        my $rule = clone( $self->{rule} );
+        my $v = Data::Validator->new(%$rule)->with(qw{ AllowExtra NoThrow });
+        $v->validate(%$argv);
+        if ( $v->has_errors ) {
+            $self->showHelp;
+            print STDERR "\n";
+            foreach my $e ( sort { $a->{name} cmp $b->{name} } @{ $v->clear_errors } ) {
+                print STDERR $e->{message}, "\n";
+            }
+            die;
         }
-        die;
-    }
-    return $argv;
+        return $argv;
+    };
+
+    return Exporter::export_to_level( 'Smart::Options', 1, @_ );
 }
 
 1;
@@ -52,7 +50,7 @@ Smart::Options::WithRule - added a rule based validation to L<Smart::Options>.
 
   use Smart::Options::WithRule;
 
-  my $opts = Smart::Options::WithRule->new
+  my $opts = Smart::Options->new
                      ->usage("Usage: $0 -y [num]")
                      ->demand('y')
                      ->describe( y => 'year')
@@ -80,7 +78,7 @@ ref. L<Data::Validator>
 
   use Smart::Options::WithRule;
 
-  my $opts = Smart::Options::WithRule->new
+  my $opts = Smart::Options->new
                      ->usage("Usage: $0 -y [num]")
                      ->demand('y')
                      ->describe( y => 'year')

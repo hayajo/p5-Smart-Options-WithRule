@@ -6,7 +6,7 @@ use Capture::Tiny ':all';
 use Try::Tiny;
 
 subtest 'rule' => sub {
-    my $opts = Smart::Options::WithRule->new
+    my $opts = Smart::Options->new
                     ->usage("Usage: $0 -x [num] -y [num]")
                     ->demand('x', 'y')
                     ->rule( x => { isa => 'Num' } )
@@ -25,7 +25,7 @@ subtest 'rule' => sub {
 };
 
 subtest 'options' => sub {
-    my $opts = Smart::Options::WithRule->new();
+    my $opts = Smart::Options->new();
     $opts->usage("Usage: $0 -x [num] -y [num]");
     $opts->options(
         f => {
