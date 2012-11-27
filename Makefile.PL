@@ -10,6 +10,7 @@ requires 'Data::Validator';
 requires 'Data::Clone';
 
 tests 't/*.t';
+author_tests 'xt';
 
 test_requires 'Test::More';
 
