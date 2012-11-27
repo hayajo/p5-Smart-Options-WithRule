@@ -22,8 +22,9 @@ sub import {
         my $argv = $orig_parse->(@_);
         my $self = shift;
         return $argv unless ( keys %{ $self->{rule} } );
-        my $rule = clone( $self->{rule} );
-        my $v = Data::Validator->new(%$rule)->with(qw{ AllowExtra NoThrow });
+        my $cloned = clone( $self->{rule} );
+        my %rule   = map { ($self->_get_real_name($_), $cloned->{$_}) } keys %$cloned;
+        my $v = Data::Validator->new(%rule)->with(qw{ AllowExtra NoThrow });
         $v->validate(%$argv);
         if ( $v->has_errors ) {
             $self->showHelp;
