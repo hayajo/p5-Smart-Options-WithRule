@@ -3,12 +3,8 @@ use strict;
 use warnings;
 our $VERSION = '0.01';
 
-use Smart::Options ();
-
 use Data::Validator;
 use Data::Clone;
-
-use Exporter;
 
 sub import {
     my $pkg = shift;
@@ -36,8 +32,6 @@ sub import {
         }
         return $argv;
     };
-
-    return Exporter::export_to_level( 'Smart::Options', 1, @_ );
 }
 
 1;
@@ -49,6 +43,7 @@ Smart::Options::WithRule - added a rule based validation to L<Smart::Options>.
 
 =head1 SYNOPSIS
 
+  use Smart::Options;
   use Smart::Options::WithRule;
 
   my $opts = Smart::Options->new
@@ -77,6 +72,7 @@ a validation rule.
 
 ref. L<Data::Validator>
 
+  use Smart::Options;
   use Smart::Options::WithRule;
 
   my $opts = Smart::Options->new

@@ -1,6 +1,7 @@
 use strict;
 use Test::More;
 
+use Smart::Options;
 use Smart::Options::WithRule;
 use Capture::Tiny ':all';
 use Try::Tiny;

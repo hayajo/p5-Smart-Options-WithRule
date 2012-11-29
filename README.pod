@@ -4,6 +4,7 @@ Smart::Options::WithRule - added a rule based validation to L<Smart::Options>.
 
 =head1 SYNOPSIS
 
+  use Smart::Options;
   use Smart::Options::WithRule;
 
   my $opts = Smart::Options->new
@@ -32,6 +33,7 @@ a validation rule.
 
 ref. L<Data::Validator>
 
+  use Smart::Options;
   use Smart::Options::WithRule;
 
   my $opts = Smart::Options->new
